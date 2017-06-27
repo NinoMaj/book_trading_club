@@ -39,6 +39,7 @@ const renderApp = (location: string, req: Object, plainPartialState: ?Object,
         ${head.meta}
         <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
         <link rel="stylesheet" href="${STATIC_PATH}/css/font-awesome.min.css">
+        <link rel='shortcut icon' type='image/x-icon' href='https://s3.eu-central-1.amazonaws.com/ninomajder.com/Book_Trading_Club/favicon.ico' />
         ${css.toString()}
       </head>
       <body>
