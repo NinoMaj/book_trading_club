@@ -9,9 +9,9 @@ Features:
 TODO:
 [+] Request sent notification
 [+] Homepage
-[ ] Settings page
-[ ] Cleanup
-  [ ] eslint
-  [ ] flow
-  [ ] console.log removal
-  [ ] push to github
+[+] Settings page
+[+] Cleanup
+  [+] eslint
+  [+] flow
+  [+] console.log removal
+  [+] push to github

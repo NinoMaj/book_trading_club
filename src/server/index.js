@@ -6,7 +6,7 @@ import bodyParser from 'body-parser'
 import passport from 'passport'
 
 import routing from './routing'
-import { WEB_PORT, STATIC_PATH, DB_URI } from '../shared/config'
+import { WEB_PORT, STATIC_PATH } from '../shared/config'
 import { isProd } from '../shared/util'
 import db from './models'
 import localSignupStrategy from './passport/local-signup'
@@ -20,7 +20,7 @@ const app = express()
 
 // connect to the database and load models
 // require('./server/models').connect(DB_URI)
-db(DB_URI)
+db(process.env.MONGODB_URI)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
