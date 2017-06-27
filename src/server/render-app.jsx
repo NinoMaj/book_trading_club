@@ -7,7 +7,7 @@ import { StaticRouter } from 'react-router'
 import Helmet from 'react-helmet'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-// import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
+import { ServerStyleSheet } from 'styled-components'
 
 import initStore from './init-store'
 import App from './../shared/app'
@@ -17,18 +17,19 @@ import { isProd } from '../shared/util'
 const renderApp = (location: string, req: Object, plainPartialState: ?Object,
   routerContext: ?Object = {}) => {
   const store = initStore(plainPartialState)
-  // const sheet = new ServerStyleSheet()
-  const appHtml = ReactDOMServer.renderToString(
+  const sheet = new ServerStyleSheet()
+  const appHtml = ReactDOMServer.renderToString(sheet.collectStyles(
     <Provider store={store}>
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent: req.headers['user-agent'] })}>
         <StaticRouter location={location} context={routerContext}>
           <App />
         </StaticRouter>
       </MuiThemeProvider>
-    </Provider>)
+    </Provider>),
+  )
   const head = Helmet.rewind()
 
-  // const css = sheet.getStyleTags()
+  const css = sheet.getStyleTags()
   // ${css}
   return (
     `<!doctype html>
@@ -38,6 +39,7 @@ const renderApp = (location: string, req: Object, plainPartialState: ?Object,
         ${head.meta}
         <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
         <link rel="stylesheet" href="${STATIC_PATH}/css/font-awesome.min.css">
+        ${css.toString()}
       </head>
       <body>
         <div class="${APP_CONTAINER_CLASS}">${appHtml}</div>

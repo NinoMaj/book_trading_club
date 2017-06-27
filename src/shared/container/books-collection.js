@@ -67,7 +67,7 @@ class BooksCollection extends React.Component<Props> {
           )
         : null
     } else {
-      return null
+      bookList = null
     }
 
     return (

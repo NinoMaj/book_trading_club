@@ -31,7 +31,7 @@ type Props = {
 }
 
 const Alert = ({ message, hideAlertAction }: Props) => (
-  <AlertDiv onClick={hideAlertAction()}>{message}</AlertDiv>
+  <AlertDiv onClick={hideAlertAction}>{message}</AlertDiv>
 )
 
 const mapDispatchToProps = dispatch => ({

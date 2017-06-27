@@ -40,7 +40,8 @@ type Props = {
   xClicked: () => mixed,
 }
 
-const ApprovalItem = ({ bookId,
+const ApprovalItem = ({
+  bookId,
   bookTitle,
   requestorName,
   requestorEmail,

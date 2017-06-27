@@ -38,7 +38,7 @@ const AcceptIcon = ({ title, acceptClicked, position, top, left, right, marginRi
     left={left}
     right={right}
     marginRight={marginRight}
-    />
+  />
 )
 
 export default AcceptIcon

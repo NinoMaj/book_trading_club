@@ -36,7 +36,7 @@ const Nav = ({ user }: Props) => {
   ] : [
       { route: SIGN_UP_PAGE_ROUTE, label: 'Sign-up page' },
       { route: LOGIN_PAGE_ROUTE, label: 'Login page' },
-    ]
+  ]
   return (
     <nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
       <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">

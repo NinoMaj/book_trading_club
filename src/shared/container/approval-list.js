@@ -65,6 +65,7 @@ const Chevron = styled.i`
   font-size: 1.2em;
   font-weight: 500;
   position: relative;
+
   top: 1px;
   left: 5px;
 `
@@ -79,7 +80,7 @@ type Props = {
   } };
 
 type State = {
-  showRequests: boolean,
+  showRequests?: boolean,
 };
 
 class ApprovalList extends React.Component<Props, State> {

@@ -7,10 +7,10 @@ import styled from 'styled-components'
 import { requestBook, acceptRequest, deleteBook } from '../action/books'
 import { showAlert, hideAlert } from '../action/user-settings'
 import { MY_BOOKS_PAGE_ROUTE, LIBRARY_PAGE_ROUTE } from '../routes'
-import RequestIcon from './request-icon.jsx'
-import AcceptIcon from './accept-icon.jsx'
-import XButton from './x-button.jsx'
-import RequestSentIcon from './request-sent-icon.jsx'
+import RequestIcon from './request-icon'
+import AcceptIcon from './accept-icon'
+import XButton from './x-button'
+import RequestSentIcon from './request-sent-icon'
 
 const ImageHolder = styled.li`
   width: 128px;
@@ -22,11 +22,20 @@ const ImageHolder = styled.li`
 
 type Props = {
   imageUrl: string,
-  requestedBy: Object,
+  requestedBy: any,
   alreadyRequested: boolean,
+  requestBookAction: () => any,
+  acceptRequestAction: () => any,
+  deleteBookAction: () => any,
+  showAlertAction: () => any,
+  hideAlertAction: () => any,
 }
 
-class BookItem extends React.Component {
+type State = {
+  hover?: boolean,
+}
+
+class BookItem extends React.Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -60,7 +69,7 @@ class BookItem extends React.Component {
 
   handleAcceptClick() {
     this.props.acceptRequestAction(this.props.bookId)
-    this.toggleAlert("You've accept it to borrow a book")
+    this.toggleAlert("You've accept it to borrow a book.")
   }
 
   handleXClick() {
@@ -76,8 +85,8 @@ class BookItem extends React.Component {
   }
 
   render() {
-    let removeOrReqIcon
-    let acceptIcon
+    let removeOrReqIcon = null
+    let acceptIcon = null
     if (this.props.page === MY_BOOKS_PAGE_ROUTE) {
       removeOrReqIcon = <XButton xClicked={this.handleXClick} title="Remove" position="absolute" top="-6px" left="108px" />
       if (this.props.requestedBy.length > 0) {
@@ -85,12 +94,10 @@ class BookItem extends React.Component {
       }
     } else if (this.props.page === LIBRARY_PAGE_ROUTE && this.props.userLogged) {
       // icon = <RequestIcon src={`${STATIC_PATH}/images/exchange-arrows.svg`} alt="exchange arrows" onClick={this.handleRequestClick} />
-      removeOrReqIcon = (this.props.alreadyRequested === false) ? 
+      removeOrReqIcon = (this.props.alreadyRequested === false) ?
         <RequestIcon type="button" className="btn btn-primary" title="Request to borrow" requestClicked={this.handleRequestClick} top="2px" left="98px" />
         :
         <RequestSentIcon title="You've requested this book." position="absolute" top="2px" left="98px" />
-    } else {
-      removeOrReqIcon = null
     }
     return (
       <ImageHolder

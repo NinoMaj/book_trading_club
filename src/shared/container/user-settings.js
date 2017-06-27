@@ -3,8 +3,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { getUser, updateUser } from '../action/user-settings'
+import { getUser, updateUser, showAlert, hideAlert } from '../action/user-settings'
 import UserSettingsForm from '../component/user-settings-form'
+import Alert from '../component/alert'
 
 type Props = {
   userEmail: string,
@@ -30,9 +31,9 @@ class UserSettings extends React.Component<DefaultProps, Props, State> {
       emailReceived: false,
       userReceived: false,
       user: {
-        fullName: this.props.fullName,
-        city: this.props.city,
-        state: this.props.state,
+        fullName: this.props.fullName || '',
+        city: this.props.city || '',
+        state: this.props.state || '',
       },
     }
 
@@ -40,24 +41,18 @@ class UserSettings extends React.Component<DefaultProps, Props, State> {
     this.processForm = this.processForm.bind(this)
   }
   componentDidMount() {
-    if (this.props.userEmail.length > 0 && this.state.emailReceived === false) {
+    if (this.props.userEmail && this.state.emailReceived === false) {
       this.props.getUserAction(this.props.userEmail)
       this.emailReceived()
     }
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.userEmail.length > 0 && this.state.emailReceived === false) {
+    if (nextProps.userEmail && this.state.emailReceived === false) {
       this.props.getUserAction(nextProps.userEmail: string)
-      this.setState({
-        emailReceived: true,
-      })
+      this.emailReceived()
     }
-    const userReceived = (
-      nextProps.fullName.length > 0 ||
-      nextProps.city.length > 0 ||
-      nextProps.state.length > 0
-    )
+    const userReceived = (nextProps.fullName || nextProps.city || nextProps.state)
     if (userReceived && this.state.userReceived === false) {
       this.setState({
         userRecieved: true,
@@ -92,17 +87,28 @@ class UserSettings extends React.Component<DefaultProps, Props, State> {
       this.state.user.city,
       this.state.user.state,
     )
+    this.toggleAlert('Account settings updated.')
+  }
+
+  toggleAlert(message) {
+    this.props.showAlertAction(message)
+    setTimeout(() => {
+      this.props.hideAlertAction()
+    }, 3000)
   }
 
   render() {
     return (
-      <UserSettingsForm
-        fullName={this.state.user.fullName}
-        city={this.state.user.city}
-        state={this.state.user.state}
-        onChange={this.handleOnChange}
-        onClick={this.processForm}
-      />
+      <div>
+        <UserSettingsForm
+          fullName={this.state.user.fullName}
+          city={this.state.user.city}
+          state={this.state.user.state}
+          onChange={this.handleOnChange}
+          onClick={this.processForm}
+        />
+        {this.props.showAlert && <Alert message={this.props.alertMessage} />}
+      </div>
     )
   }
 }
@@ -112,6 +118,8 @@ const mapStateToProps = state => ({
   fullName: state.userSettings.fullName,
   city: state.userSettings.city,
   state: state.userSettings.state,
+  showAlert: state.userSettings.alert.show,
+  alertMessage: state.userSettings.alert.message,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -122,6 +130,8 @@ const mapDispatchToProps = dispatch => ({
     city: string,
     state: string,
   ) => dispatch(updateUser(userEmail, fullName, city, state)),
+  showAlertAction: message => dispatch(showAlert(message)),
+  hideAlertAction: () => dispatch(hideAlert()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserSettings)

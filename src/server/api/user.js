@@ -34,7 +34,7 @@ router.put(UPDATE_USER_ROUTE, (req, res) => {
   })
   .catch((err) => {
     // eslint-disable-next-line no-console
-    console.err(err)
+    console.error(err)
     res.status(500).send(err)
   })
 })

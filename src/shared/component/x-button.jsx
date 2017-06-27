@@ -18,7 +18,7 @@ const XButtonStyled = styled.span`
 `
 type Props = {
   title: string,
-  xClicked: ?Function,
+  xClicked: () => any,
   position: ?string,
   top: ?string,
   left: ?string,
@@ -31,10 +31,9 @@ const XButton = ({ title, xClicked, position, top, left }: Props) => (
     position={position}
     top={top}
     left={left}
-    >x
+  >
+    x
   </XButtonStyled>
 )
 
 export default XButton
-// left: 108px;
-// top: -6px;
