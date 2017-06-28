@@ -17,7 +17,7 @@ const app = express()
 
 // connect to the database and load models
 if (isProd) {
-  db('mongodb://heroku_t11nzz1x:hpurfsqg65c7m2qbfs60dkseh7@ds139362.mlab.com:39362/heroku_t11nzz1x')
+  db(process.env.MONGODB_URI)
 } else {
   db(LOCAL_MONGODB_URI)
 }

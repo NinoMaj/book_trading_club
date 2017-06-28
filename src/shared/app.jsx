@@ -32,12 +32,6 @@ import {
 injectTapEventPlugin()
 
 class App extends React.Component {
-  props: {
-    user: Object,
-    loginCheckAction: Function,
-    getBooksAction: Function,
-  }
-
   constructor(props) {
     super(props)
   }
