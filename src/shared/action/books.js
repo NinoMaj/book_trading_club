@@ -28,6 +28,7 @@ export const deleteBookSuccess = createAction(DELETE_BOOK_SUCCESS)
 export const bookFailure = createAction(BOOK_FAILURE)
 
 export const addBook = (searchTerm: string, owner: string) => (dispatch: Function) => {
+  console.log('process.env.BOOK_API_KEY', process.env.BOOK_API_KEY)
   dispatch(bookRequest())
   return fetch(`${BOOK_API_URL}${searchTerm}${process.env.BOOK_API_KEY}`, { method: 'GET' })
     .then((res) => {

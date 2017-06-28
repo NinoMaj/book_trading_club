@@ -57,7 +57,6 @@
     "bootstrap": "^4.0.0-alpha.6",
     "caniuse-lite": "^1.0.30000676",
     "compression": "^1.6.2",
-    "env-cmd": "^5.1.0",
     "express": "^4.15.3",
     "has-flag": "^2.0.0",
     "is-utf8": "^0.2.1",
