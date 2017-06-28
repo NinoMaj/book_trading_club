@@ -5,7 +5,6 @@ import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { connect } from 'react-redux'
 
 import { APP_NAME } from './config'
 import Nav from './component/nav'
@@ -36,13 +35,7 @@ class App extends React.Component {
     super(props)
   }
 
-  componentDidMount() {
-    if (!this.props.user.logged && typeof window !== 'undefined' && localStorage.token) {
-      const decodedToken = JSON.parse(window.atob(localStorage.token.split('.')[1]))
-      this.props.loginCheckAction({ email: decodedToken.email, name: decodedToken.name })
-    }
-    this.props.getBooksAction()
-  }
+
   render() {
     return (
       <div style={{ paddingTop: 54 }}>
@@ -51,8 +44,8 @@ class App extends React.Component {
         
         <Switch>
           <Route exact path={HOME_PAGE_ROUTE} render={() => <HomePage />} />
-          <Route path={LIBRARY_PAGE_ROUTE} component={<LibraryPage />} />
-          <Route path={MY_BOOKS_PAGE_ROUTE} component={<MyBooksPage />} />
+          <Route path={LIBRARY_PAGE_ROUTE} render={() => <LibraryPage />} />
+          <Route path={MY_BOOKS_PAGE_ROUTE} render={() => <MyBooksPage />} />
           <Route path={SIGN_UP_PAGE_ROUTE} render={history => <SignUpPage history={history.history} />} />
           <Route path={LOGIN_PAGE_ROUTE} render={history => <LoginPage history={history.history} />} />
           <Route path={SETTINGS_PAGE_ROUTE} render={history => <SettingsPage history={history.history} />} />
@@ -64,13 +57,6 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user,
-})
 
-const mapDispatchToProps = dispatch => ({
-  loginCheckAction: email => dispatch(loginCheck(email)),
-  getBooksAction: () => dispatch(getBooks()),
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
