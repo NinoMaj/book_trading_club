@@ -52,7 +52,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path={HOME_PAGE_ROUTE} render={() => <HomePage />} />
           <Route path={LIBRARY_PAGE_ROUTE} component={<LibraryPage />} />
-          <Route path={MY_BOOKS_PAGE_ROUTE} render={<MyBooksPage />} />
+          <Route path={MY_BOOKS_PAGE_ROUTE} component={<MyBooksPage />} />
           <Route path={SIGN_UP_PAGE_ROUTE} render={history => <SignUpPage history={history.history} />} />
           <Route path={LOGIN_PAGE_ROUTE} render={history => <LoginPage history={history.history} />} />
           <Route path={SETTINGS_PAGE_ROUTE} render={history => <SettingsPage history={history.history} />} />

@@ -15,6 +15,8 @@ import authCheckMiddleware from './middleware/auth-check'
 
 const app = express()
 
+require('dotenv').config()
+
 // connect to the database and load models
 if (isProd) {
   db(process.env.MONGODB_URI)
