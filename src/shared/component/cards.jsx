@@ -10,7 +10,7 @@ const Cards = () => (
         <CardItem
           title="See our library"
           subtitle="There is over 5 books in our library :)"
-          imgSrc="https://s3.eu-central-1.amazonaws.com/ninomajder.com/Book_Trading_Club/library.jpg"
+          imgSrc="https://s3.eu-central-1.amazonaws.com/ninomajder.com/Book_Trading_Club/library2.jpg"
           imgAlt="library"
           cardText="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
