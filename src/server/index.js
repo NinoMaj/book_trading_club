@@ -6,21 +6,23 @@ import bodyParser from 'body-parser'
 import passport from 'passport'
 
 import routing from './routing'
-import { WEB_PORT, STATIC_PATH, DB_URI } from '../shared/config'
+import { WEB_PORT, STATIC_PATH, LOCAL_MONGODB_URI } from '../shared/config'
 import { isProd } from '../shared/util'
 import db from './models'
 import localSignupStrategy from './passport/local-signup'
 import localLoginStrategy from './passport/local-login'
 import authCheckMiddleware from './middleware/auth-check'
 
-// global.navigator = global.navigator || {}
-// global.navigator.userAgent = global.navigator.userAgent || 'all'
-
 const app = express()
 
+require('dotenv').config()
+
 // connect to the database and load models
-// require('./server/models').connect(DB_URI)
-db(DB_URI)
+if (isProd) {
+  db(process.env.MONGODB_URI)
+} else {
+  db(LOCAL_MONGODB_URI)
+}
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())

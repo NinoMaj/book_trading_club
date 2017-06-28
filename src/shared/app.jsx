@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import { APP_NAME } from './config'
 import Nav from './component/nav'
@@ -32,12 +33,6 @@ import {
 injectTapEventPlugin()
 
 class App extends React.Component {
-  props: {
-    user: Object,
-    loginCheckAction: Function,
-    getBooksAction: Function,
-  }
-
   constructor(props) {
     super(props)
   }
@@ -49,6 +44,8 @@ class App extends React.Component {
     }
     this.props.getBooksAction()
   }
+
+
   render() {
     return (
       <div style={{ paddingTop: 54 }}>
@@ -79,4 +76,4 @@ const mapDispatchToProps = dispatch => ({
   getBooksAction: () => dispatch(getBooks()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

@@ -6,13 +6,17 @@
   "browserslist": [
     "> 1%"
   ],
+  "engines": {
+    "node": "8.0.0",
+    "npm": "5.0.0"
+  },
   "scripts": {
     "start": "npm run dev:start",
-    "dev:start": "cross-env NODE_ENV=development nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
-    "dev:wds": " cross-env NODE_ENV=development webpack-dev-server --progress",
-    "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
+    "dev:start": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
+    "dev:wds": " webpack-dev-server --progress",
+    "prod:start": "heroku local",
+    "heroku-postbuild": "npm run prod:build",
     "prod:build": "rimraf lib dist && babel src -d lib --ignore .test.js && cross-env NODE_ENV=production webpack -p --progress",
-    "prod:stop": "pm2 delete server",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "eslint src && flow && jest --coverage",
     "test:no-flow": "eslint src && jest --coverage",
@@ -42,7 +46,6 @@
     "flow-bin": "^0.46.0",
     "husky": "^0.13.3",
     "jest": "^20.0.4",
-    "pm2": "^2.4.6",
     "rimraf": "^2.6.1",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
@@ -54,6 +57,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "caniuse-lite": "^1.0.30000676",
     "compression": "^1.6.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "has-flag": "^2.0.0",
     "is-utf8": "^0.2.1",
