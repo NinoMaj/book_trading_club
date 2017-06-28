@@ -22,7 +22,7 @@ const Cards = () => (
         <CardItem
           title="Catalogue your books"
           subtitle="Adding new books is super easy"
-          imgSrc="https://www.prisonfellowship.org/site/wp-content/uploads/2016/07/Books_300x200.jpg"
+          imgSrc="https://s3.eu-central-1.amazonaws.com/ninomajder.com/Book_Trading_Club/books.jpg"
           imgAlt="books"
           cardText="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
@@ -34,7 +34,7 @@ const Cards = () => (
           <CardItem
           title="Borrow books"
           subtitle="Borrow books from and to others"
-          imgSrc="https://sackingtheboss.com/wp-content/uploads/2017/01/borrow-300x200.jpg"
+          imgSrc="https://s3.eu-central-1.amazonaws.com/ninomajder.com/Book_Trading_Club/borrow.jpg"
           imgAlt="borrows"
           cardText="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
