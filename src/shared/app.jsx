@@ -5,6 +5,8 @@ import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import { APP_NAME } from './config'
 import Nav from './component/nav'
@@ -35,6 +37,14 @@ class App extends React.Component {
     super(props)
   }
 
+  componentDidMount() {
+    if (!this.props.user.logged && typeof window !== 'undefined' && localStorage.token) {
+      const decodedToken = JSON.parse(window.atob(localStorage.token.split('.')[1]))
+      this.props.loginCheckAction({ email: decodedToken.email, name: decodedToken.name })
+    }
+    this.props.getBooksAction()
+  }
+
 
   render() {
     return (
@@ -57,6 +67,13 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.user,
+})
 
+const mapDispatchToProps = dispatch => ({
+  loginCheckAction: email => dispatch(loginCheck(email)),
+  getBooksAction: () => dispatch(getBooks()),
+})
 
-export default App
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
