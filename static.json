@@ -1,7 +1,0 @@
-{
-  "root": "lib/",
-  "clean_urls": false,
-  "routes": {
-    "/**": "index.html"
-  }
-}

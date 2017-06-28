@@ -11,7 +11,7 @@ import {
   REJECT_REQUEST_ROUTE,
   DELETE_BOOK_ROUTE,
 } from '../../shared/routes'
-import { BOOK_API_URL, BOOK_API_KEY } from '../config'
+import { BOOK_API_URL } from '../config'
 
 export const BOOK_REQUEST = 'BOOK_REQUEST'
 export const ADD_BOOK_SUCCESS = 'ADD_BOOK_SUCCESS'
@@ -29,7 +29,7 @@ export const bookFailure = createAction(BOOK_FAILURE)
 
 export const addBook = (searchTerm: string, owner: string) => (dispatch: Function) => {
   dispatch(bookRequest())
-  return fetch(`${BOOK_API_URL}${searchTerm}${BOOK_API_KEY}`, { method: 'GET' })
+  return fetch(`${BOOK_API_URL}${searchTerm}${process.env.BOOK_API_KEY}`, { method: 'GET' })
     .then((res) => {
       if (!res.ok) throw Error(res.statusText)
       return res.json()

@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import PassportLocalStrategy from 'passport-local'
 
 import User from '../models/users'
-import { JWT_SECRET } from '../../shared/config'
 
 /**
  * Return the Passport Local Strategy object.
@@ -48,7 +47,7 @@ const localLoginStrategy = new PassportLocalStrategy({
       }
 
       // create a token string
-      const token = jwt.sign(payload, JWT_SECRET)
+      const token = jwt.sign(payload, process.env.JWT_SECRET)
       const data = {
         name: user.name,
         email: user.email,
