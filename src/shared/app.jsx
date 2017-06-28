@@ -42,13 +42,13 @@ class App extends React.Component {
     super(props)
   }
 
-  // componentDidMount() {
-  //   if (!this.props.user.logged && typeof window !== 'undefined' && localStorage.token) {
-  //     const decodedToken = JSON.parse(window.atob(localStorage.token.split('.')[1]))
-  //     this.props.loginCheckAction({ email: decodedToken.email, name: decodedToken.name })
-  //   }
-  //   this.props.getBooksAction()
-  // }
+  componentDidMount() {
+    if (!this.props.user.logged && typeof window !== 'undefined' && localStorage.token) {
+      const decodedToken = JSON.parse(window.atob(localStorage.token.split('.')[1]))
+      this.props.loginCheckAction({ email: decodedToken.email, name: decodedToken.name })
+    }
+    this.props.getBooksAction()
+  }
   render() {
     return (
       <div style={{ paddingTop: 54 }}>
