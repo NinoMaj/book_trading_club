@@ -23,8 +23,7 @@ const userSettingsReducer = (
       show: Boolean,
       message: String
     },
-    error: ?string
-  } = initialState,
+    error: ?string } = initialState,
   action: { type: String, payload: any },
 ) => {
   switch (action.type) {

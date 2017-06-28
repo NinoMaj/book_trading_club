@@ -6,21 +6,21 @@ import bodyParser from 'body-parser'
 import passport from 'passport'
 
 import routing from './routing'
-import { WEB_PORT, STATIC_PATH } from '../shared/config'
+import { WEB_PORT, STATIC_PATH, LOCAL_MONGODB_URI } from '../shared/config'
 import { isProd } from '../shared/util'
 import db from './models'
 import localSignupStrategy from './passport/local-signup'
 import localLoginStrategy from './passport/local-login'
 import authCheckMiddleware from './middleware/auth-check'
 
-// global.navigator = global.navigator || {}
-// global.navigator.userAgent = global.navigator.userAgent || 'all'
-
 const app = express()
 
 // connect to the database and load models
-// require('./server/models').connect(DB_URI)
-db(process.env.MONGODB_URI)
+if (isProd) {
+  db('mongodb://heroku_t11nzz1x:hpurfsqg65c7m2qbfs60dkseh7@ds139362.mlab.com:39362/heroku_t11nzz1x')
+} else {
+  db(LOCAL_MONGODB_URI)
+}
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
